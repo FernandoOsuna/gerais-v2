@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule prueba/.html http://www.google.es [R] 

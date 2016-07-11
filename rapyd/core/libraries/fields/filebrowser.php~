@@ -1,0 +1,41 @@
+<?php
+/**
+  * Fichero Filebrowser
+  *
+  * @autor  Fernando Osuna
+  * 
+  */
+?><!DOCTYPE html>
+<html>
+	<head>
+	<title>Insertar Fichero</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+
+
+<script type="text/javascript" language="javascript">
+$(document).on("click","div.fichero",function(){
+  item_url = $(this).data("src");
+  var args = top.tinymce.activeEditor.windowManager.getParams();
+  win = (args.window);
+  input = (args.input);
+  win.document.getElementById(input).value = item_url;
+  top.tinymce.activeEditor.windowManager.close();
+});
+</script>
+
+</head>
+<body>
+
+<?php
+$carpeta_ficheros = 'uploads/';
+$directorio = opendir($carpeta_ficheros); // Abre la carpeta
+while ($fichero = readdir($directorio)) { // Lee cada uno de los ficheros
+  if (!is_dir($fichero)){ // Omite las carpetas
+echo "<div class='fichero' data-src='".$carpeta_ficheros.$fichero."'>".$fichero."</div>";
+}
+}
+?>
+
+</body>
+</html>
